@@ -48,7 +48,7 @@ public class StudentServicempl implements StudentService {
 	}
 
 	@Override
-	public void updateByid(Long id, Student std) {
+	public Student updateByid(Long id, Student std) {
 		 
 		Student idCheck= stdRepo.findById(id)
 				.orElseThrow(()->new RuntimeException("Id not is not found"+ id));
@@ -57,10 +57,10 @@ public class StudentServicempl implements StudentService {
 		idCheck.setDob(std.getDob());
 		idCheck.setAddress(std.getAddress());
 		idCheck.setGender(std.getGender());
-		idCheck.setRollNumber(std.getRollNumber());
+	//	idCheck.setRollNumber(std.getRollNumber());
 		idCheck.setPhone(std.getPhone());
-		
-		
+		std.setId(id);
+		return stdRepo.save(std);
 		
 	}
 

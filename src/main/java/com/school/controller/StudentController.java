@@ -63,7 +63,7 @@ public class StudentController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> updateByid( @Valid @PathVariable Long id, Student std){
+	public ResponseEntity<String> updateByid(@PathVariable Long id,@RequestBody Student std){
 		
 		stdServ.updateByid(id, std);
 		
