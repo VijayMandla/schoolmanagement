@@ -1,7 +1,6 @@
 package com.school.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.school.dto.StudentCreateDto;
+import com.school.dto.StudentUpdateDto;
 import com.school.entity.Student;
 import com.school.service.StudentService;
 
@@ -26,49 +27,65 @@ public class StudentController {
 
 	@Autowired
 	private StudentService stdServ;
-	
-	@PostMapping()
-	public ResponseEntity<String> save(@Valid @RequestBody Student std1){
-		
-		stdServ.save(std1);
-		return ResponseEntity.status(HttpStatus.CREATED).body("single Student data saved successfully");
-	}
-	
-	@PostMapping("/bulk")
-	public ResponseEntity<String> saveAll(@Valid @RequestBody List<Student> student){
-		
-		stdServ.saveAll(student);
+
+
+	/*
+	 * @PostMapping() public ResponseEntity<String> save(@Valid @RequestBody Student
+	 * std1) {
+	 * 
+	 * stdServ.save(std1); return ResponseEntity.status(HttpStatus.CREATED).
+	 * body("single Student data saved successfully"); }
+	 */
+
+	/*
+	 * @PostMapping("/bulk") public ResponseEntity<String>
+	 * saveAll(@Valid @RequestBody List<Student> student) {
+	 * 
+	 * stdServ.saveAll(student); return ResponseEntity.status(HttpStatus.CREATED).
+	 * body("multiple StudentsS data saved successfully"); }
+	 */
+
+	@PostMapping("/bulkData")
+	public ResponseEntity<String> saveAlldata(@Valid @RequestBody List<StudentCreateDto> student) {
+
+		stdServ.SaveAlldata(student);
 		return ResponseEntity.status(HttpStatus.CREATED).body("multiple StudentsS data saved successfully");
 	}
-	
-	@GetMapping("/{id}")
-	public Optional<Student> getById(@Valid @PathVariable Long id) {
-		
-		return stdServ.getById(id);
-		
+
+	@PostMapping()
+	public ResponseEntity<String> create(@Valid @RequestBody StudentCreateDto std1) {
+
+		stdServ.saveDto(std1);
+		return ResponseEntity.status(HttpStatus.CREATED).body("single Student data saved successfully");
 	}
-	
+
+	@GetMapping("/{id}")
+	public Student getById(@PathVariable Long id) {
+
+		return stdServ.getById(id);
+
+	}
+
 	@GetMapping()
 	public List<Student> getAll() {
-		
+
 		return stdServ.getAll();
-		
+
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deletbyId(@Valid @PathVariable Long id) {
+	public ResponseEntity<String> deletbyId(@PathVariable Long id) {
 		stdServ.deleteById(id);
 
-		return 		ResponseEntity.status(HttpStatus.OK).body("Deleted student data based on id");
+		return ResponseEntity.status(HttpStatus.OK).body("Deleted student data based on id");
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<String> updateByid(@PathVariable Long id,@RequestBody Student std){
-		
+	public ResponseEntity<String> updateByid(@PathVariable Long id, @Valid @RequestBody StudentUpdateDto std) {
+
 		stdServ.updateByid(id, std);
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body("Updated student based on id");
 	}
-	
-	
+
 }
