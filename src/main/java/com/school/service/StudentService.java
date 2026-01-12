@@ -22,4 +22,7 @@ public interface StudentService {
 	public void deleteById(Long id);
 	
 	public Student updateByid(Long id, StudentUpdateDto std);
+	
+	public List<Student> findByname(String name);
+	public List<Student> findByollNumber(Long rollNumber);
 }

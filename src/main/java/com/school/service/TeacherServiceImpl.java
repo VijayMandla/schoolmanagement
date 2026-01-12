@@ -99,6 +99,18 @@ public class TeacherServiceImpl implements TeacherService {
 		teacherRepo.save(t);
 	}
 
+	@Override
+	public List<Teacher> fingByName(String name) {
+		
+		List<Teacher> teachList= teacherRepo.findByName(name);
+		
+		if(teachList.isEmpty()) {
+			throw new ResourceNotFounExceptionHandling("Theree no matching data/records availble with this name  "+ name);
+		}
+		return teachList;
+		
+	}
+
 	}
 
 

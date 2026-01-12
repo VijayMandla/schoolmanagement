@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.school.dto.TeacherCreateDto;
@@ -65,6 +66,13 @@ public class TeacherController {
 	@DeleteMapping("/{id}")
 	public void deleteById(@PathVariable Long id) {
 		 teachserv.deleteById(id);
+		
+	}
+	
+	@GetMapping("/getByName")
+	public List<Teacher> findByName(@RequestParam String name){
+		
+		return teachserv.fingByName(name);
 		
 	}
 }

@@ -21,4 +21,7 @@ public interface TeacherService {
 	
 	public void update(Long id, TeacherUpdateDto teacherUpdate);
 	
+	public List<Teacher> fingByName(String name);
+	
+	
 }

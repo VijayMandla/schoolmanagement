@@ -105,6 +105,32 @@ public class StudentServicempl implements StudentService {
 		
 		
 	}
-	
 
+	@Override
+	public List<Student> findByname(String name) {
+		List<Student> list= stdRepo.findByName(name);
+		
+		if( list.isEmpty()) {
+			throw new ResourceNotFounExceptionHandling(name);
+		}
+		
+		
+				
+		return list;
+	}
+
+	@Override
+	public List<Student> findByollNumber(Long rollNumber) {
+		List<Student > stdlist=stdRepo.findByRollNumber(rollNumber);
+		
+		if(stdlist.contains(rollNumber)) {
+			
+		return stdlist;
+		}
+		else {
+			throw new ResourceNotFounExceptionHandling("There is no records with this roll number "+rollNumber);
+			
+	}
+	
+	}
 }

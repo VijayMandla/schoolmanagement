@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.school.dto.StudentCreateDto;
@@ -88,4 +89,23 @@ public class StudentController {
 		return ResponseEntity.status(HttpStatus.OK).body("Updated student based on id");
 	}
 
+	@GetMapping("/getByName")
+	public List<Student> getByName(@RequestParam String name){
+		
+		
+		
+		return stdServ.findByname(name);
+		
+		
+	}
+	
+	@GetMapping("/getByRollNumber")
+	public List<Student> getByName(@RequestParam Long rollNumber){
+		
+		
+		
+		return stdServ.findByollNumber(rollNumber);
+		
+		
+	}
 }
